@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinanzApp - Login</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="logo">FinanzApp</h1>
+            <div class="nav-menu">
+                <a href="index.html">Inicio</a>
+                <a href="dashboard.html">Dashboard</a>
+                <a href="registro.html">Registro</a>
+                <a href="login.html" class="active">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="form-container">
+            <h2>Iniciar sesión</h2>
+            <form id="formLogin">
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Contraseña:</label>
+                    <input type="password" id="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Ingresar</button>
+                <p class="mt-20">¿No tienes cuenta? <a href="registro.html">Regístrate</a></p>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 FinanzApp - Proyecto de portafolio</p>
+    </footer>
+
+    <script>
+        // SIMULACIÓN: Por ahora, cualquier usuario funciona
+        document.getElementById('formLogin').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Por ahora, simulamos login exitoso
+            localStorage.setItem('usuario', JSON.stringify({
+                id: 1,
+                nombre: 'Usuario Demo',
+                email: document.getElementById('email').value
+            }));
+            
+            window.location.href = 'dashboard.html';
+        });
+    </script>
+</body>
+</html>

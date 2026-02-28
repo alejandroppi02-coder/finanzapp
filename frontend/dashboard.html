@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinanzApp - Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="logo">FinanzApp</h1>
+            <div class="nav-menu">
+                <a href="index.html">Inicio</a>
+                <a href="dashboard.html" class="active">Dashboard</a>
+                <a href="#" id="logoutBtn">Cerrar sesión</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="dashboard-header">
+            <h2>Panel de Control</h2>
+            <button class="btn btn-primary" id="btnNuevaTransaccion">+ Nueva transacción</button>
+        </div>
+
+        <!-- Resumen de finanzas -->
+        <div class="resumen-cards">
+            <div class="card">
+                <h3>💰 Total Ingresos</h3>
+                <p class="monto ingresos" id="totalIngresos">$0.00</p>
+            </div>
+            <div class="card">
+                <h3>💸 Total Gastos</h3>
+                <p class="monto gastos" id="totalGastos">$0.00</p>
+            </div>
+            <div class="card">
+                <h3>📊 Balance</h3>
+                <p class="monto" id="balance">$0.00</p>
+            </div>
+        </div>
+
+        <!-- Gráfico -->
+        <div class="grafico-wrapper">
+    <canvas id="graficoGastos" width="300" height="300"></canvas>
+</div>
+
+        <!-- Tabla de transacciones -->
+        <div class="transacciones-container">
+            <h3>Últimas transacciones</h3>
+            <table class="tabla-transacciones">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Descripción</th>
+                        <th>Categoría</th>
+                        <th>Tipo</th>
+                        <th>Monto</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaTransaccionesBody">
+                    <!-- Se llenará con JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- Modal para nueva transacción -->
+    <div id="modalTransaccion" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Nueva transacción</h3>
+            <form id="formTransaccion">
+                <div class="form-group">
+                    <label for="tipo">Tipo:</label>
+                    <select id="tipo" required>
+                        <option value="ingreso">Ingreso</option>
+                        <option value="gasto">Gasto</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="cantidad">Cantidad ($):</label>
+                    <input type="number" id="cantidad" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="descripcion">Descripción:</label>
+                    <input type="text" id="descripcion" required>
+                </div>
+                <div class="form-group">
+                    <label for="categoria">Categoría:</label>
+                    <select id="categoria" required>
+                        <option value="1">Salario</option>
+                        <option value="2">Freelance</option>
+                        <option value="3">Alimentación</option>
+                        <option value="4">Transporte</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/dashboard.js"></script>
+
+<!-- Modal para nueva transacción -->
+<div id="modalTransaccion" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h3>Nueva transacción</h3>
+        <form id="formTransaccion">
+            <div class="form-group">
+                <label for="tipo">Tipo:</label>
+                <select id="tipo" required>
+                    <option value="ingreso">Ingreso</option>
+                    <option value="gasto">Gasto</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="cantidad">Cantidad ($):</label>
+                <input type="number" id="cantidad" step="0.01" required>
+            </div>
+            <div class="form-group">
+                <label for="descripcion">Descripción:</label>
+                <input type="text" id="descripcion" required>
+            </div>
+            <div class="form-group">
+                <label for="categoria">Categoría:</label>
+                <select id="categoria" required>
+                    <!-- Se llena con JavaScript -->
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
+    </div>
+</div>
+
+<!-- Modal de confirmación personalizado -->
+<div id="modalConfirmacion" class="modal modal-confirm">
+    <div class="modal-content modal-confirm-content">
+        <div class="modal-confirm-header">
+            <span class="modal-confirm-icon">❓</span>
+            <h3>Confirmar acción</h3>
+        </div>
+        <div class="modal-confirm-body">
+            <p id="confirmMensaje">¿Estás seguro?</p>
+        </div>
+        <div class="modal-confirm-footer">
+            <button id="confirmCancelar" class="btn btn-secondary">Cancelar</button>
+            <button id="confirmAceptar" class="btn btn-danger">Eliminar</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de confirmación personalizado -->
+<div id="modalConfirmacion" class="modal modal-confirm">
+    <div class="modal-content modal-confirm-content">
+        <div class="modal-confirm-header">
+            <span class="modal-confirm-icon">❓</span>
+            <h3>Confirmar acción</h3>
+        </div>
+        <div class="modal-confirm-body">
+            <p id="confirmMensaje">¿Estás seguro?</p>
+        </div>
+        <div class="modal-confirm-footer">
+            <button id="confirmCancelar" class="btn btn-secondary">Cancelar</button>
+            <button id="confirmAceptar" class="btn btn-danger">Eliminar</button>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
